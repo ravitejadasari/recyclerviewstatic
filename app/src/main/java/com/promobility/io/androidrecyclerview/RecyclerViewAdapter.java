@@ -37,12 +37,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         holder.textView.setText(dataModels.get(position).getName());
         holder.tv_item_android_ver.setText(dataModels.get(position).getVersions());
-        holder.textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(context, "" + position, Toast.LENGTH_SHORT).show();
-            }
-        });
 
     }
 
@@ -51,7 +45,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return dataModels.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView textView, tv_item_android_ver;
 
@@ -60,7 +54,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
             this.textView = (TextView) itemView.findViewById(R.id.tv_item_android);
             this.tv_item_android_ver = (TextView) itemView.findViewById(R.id.tv_item_android_ver);
+            itemView.setOnClickListener(this);
+        }
 
+        @Override
+        public void onClick(View view) {
+            Toast.makeText(context, "" + getAdapterPosition(), Toast.LENGTH_SHORT).show();
         }
     }
 }
